@@ -1,3 +1,7 @@
-__version__ = '14.0.2'
+import os
+import sys
 
-from .proto.osmosis import *
+sys.path.insert(0, os.path.abspath(
+    os.path.join(os.path.dirname(__file__), 'proto')))
+
+from .proto.osmosis import epochs

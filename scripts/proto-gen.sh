@@ -9,6 +9,10 @@ cosmos_sdk_version=v0.45.12
 osmosis_version=v14.0.2
 # ------------------------------------------------
 
+prepare() {
+  mv $PKG_PATH/__init__.py __init__.py.bak
+}
+
 # Add PKG_PATH as dir if it doesn't exist.
 clean() {
   rm -rf ./proto/
@@ -61,9 +65,9 @@ code_gen() {
     # echo "$cosmos_sdk_dir"
     mkdir -p ./$PKG_PATH/${dir}
     python -m grpc_tools.protoc \
+      -I proto \
       -I "$cosmos_sdk_dir/third_party/proto" \
       -I "$cosmos_sdk_dir/proto" \
-      -I proto \
       --init_python_out=$PKG_PROTO_SUBDIR \
       --init_python_opt=imports=protobuf+grpcio+grpclib \
       --python_out=$PKG_PROTO_SUBDIR \
@@ -72,11 +76,15 @@ code_gen() {
       --mypy_grpc_out=$PKG_PROTO_SUBDIR \
       $(find "${dir}" -type f -name '*.proto')
   done
+
+  mv __init__.py.bak $PKG_PATH/__init__.py
 }
 
 # ------------------------------------------------
 # __main__ : Start of script execution
 # ------------------------------------------------
+
+prepare
 
 clean
 
