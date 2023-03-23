@@ -15,7 +15,6 @@ clean() {
   rm -rf ./osmosis/
   rm -rf $PKG_PATH
   mkdir $PKG_PATH
-  echo >$PKG_PATH/__init__.py
 }
 
 copy_osmosis_protobuf_from_remote() {
@@ -65,6 +64,8 @@ code_gen() {
       -I "$cosmos_sdk_dir/third_party/proto" \
       -I "$cosmos_sdk_dir/proto" \
       -I proto \
+      --init_python_out=$PKG_PROTO_SUBDIR \
+      --init_python_opt=imports=protobuf+grpcio+grpclib \
       --python_out=$PKG_PROTO_SUBDIR \
       --grpc_python_out=$PKG_PROTO_SUBDIR \
       --mypy_out=$PKG_PROTO_SUBDIR \

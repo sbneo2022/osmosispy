@@ -109,6 +109,31 @@ tx_resp = sdk.tx.execute_msgs(
 
 You can broadcast any available transaction by messages that inherits `Message` to the `sdk.tx.execute_msgs` function.
 
+## Publishing to PyPI
+
+The publish workflow looks like this:
+
+1. Code-gen the new types from the chain. If there are changes, these should be committed.
+
+   ```sh
+   poetry run make proto-gen
+   ```
+
+2. Increment the package version. For example, use `poetry version preminor` to do a pre-release for a minor version.
+
+   ```sh
+   poetry version [update-keyword]
+   ```
+
+3. Create a tag and push it the remote origin.
+
+   ```sh
+   git tag -asm "v15.0.0" v15.0.0
+   git push --tags
+   ```
+
+4. The tag should trigger a [GitHub Action Workflow](https://github.com/chadury2021/osmosis-pysdk/actions/workflows/publish-to-pypi.yml). **NOT IMPLEMENTED YET**
+
 ## Documentation Website
 
 Documentation can be found [here](https://example.com) (**NOT IMPLEMENTED YET**)

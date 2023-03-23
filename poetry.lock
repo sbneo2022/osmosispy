@@ -759,6 +759,21 @@ files = [
 ]
 
 [[package]]
+name = "protobuf-init"
+version = "0.3.0"
+description = "generate __init__.py files for protobuf projects"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "protobuf-init-0.3.0.tar.gz", hash = "sha256:742c6e5fde383fb5029147261edd66c41ce6d7939d36403ab76160b8f6ef5a34"},
+    {file = "protobuf_init-0.3.0-py3-none-any.whl", hash = "sha256:6c8aab0a0d070f8c82a4458958297141894e4fe60071118fe5b3b21e79a0cb13"},
+]
+
+[package.dependencies]
+protobuf = ">=3.19.1"
+
+[[package]]
 name = "psutil"
 version = "5.9.4"
 description = "Cross-platform lib for process and system monitoring in Python."
@@ -1103,4 +1118,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "3.11.2"
-content-hash = "cd133ce0d9e66a03363e5853c0bff9d462bb5c162f1c4c70c8601eccd5b3ebc0"
+content-hash = "2fc63c22c39d3437cdfeb33baad190d8294b9e46d3c129327dc2d33fb1e0981c"
