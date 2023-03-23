@@ -89,7 +89,6 @@ print(query_resp)
 ### Ex: Submitting transactions
 
 ```python
-# version 0.16.3
 from osmosispy import OpenPositionMsg
 
 tx_resp = sdk.tx.execute_msgs(
