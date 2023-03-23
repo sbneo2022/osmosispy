@@ -6,7 +6,7 @@ set -e pipefail
 PKG_PATH="osmosis_proto"
 PKG_PROTO_SUBDIR="$PKG_PATH/proto"
 cosmos_sdk_version=v0.45.12
-osmosis_version=v15.0.0
+osmosis_version=v14.0.2
 # ------------------------------------------------
 
 # Add PKG_PATH as dir if it doesn't exist.
@@ -18,7 +18,7 @@ clean() {
   echo >$PKG_PATH/__init__.py
 }
 
-copy_nibiru_protobuf_from_remote() {
+copy_osmosis_protobuf_from_remote() {
   git clone --depth 1 --branch $osmosis_version https://github.com/osmosis-labs/osmosis.git
   cp -r ./osmosis/proto/ ./proto/
   cp ./osmosis/go.mod go.mod
@@ -33,6 +33,7 @@ protoc_gen_gocosmos() {
 
   # get protoc gocosmos plugin
   go get github.com/regen-network/cosmos-proto/protoc-gen-gocosmos@latest 2>/dev/null
+
   # get cosmos sdk from github
   go get github.com/cosmos/cosmos-sdk@$cosmos_sdk_version 2>/dev/null
 }
@@ -61,9 +62,9 @@ code_gen() {
     # echo "$cosmos_sdk_dir"
     mkdir -p ./$PKG_PATH/${dir}
     python -m grpc_tools.protoc \
-      -I proto \
       -I "$cosmos_sdk_dir/third_party/proto" \
       -I "$cosmos_sdk_dir/proto" \
+      -I proto \
       --python_out=$PKG_PROTO_SUBDIR \
       --grpc_python_out=$PKG_PROTO_SUBDIR \
       --mypy_out=$PKG_PROTO_SUBDIR \
@@ -78,7 +79,7 @@ code_gen() {
 
 clean
 
-copy_nibiru_protobuf_from_remote
+copy_osmosis_protobuf_from_remote
 
 code_gen
 
