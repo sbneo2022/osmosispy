@@ -3,7 +3,7 @@
 set -e pipefail
 
 # ------------------------------------------------ CONFIG
-PKG_PATH="osmosis_proto"
+PKG_PATH="osmosispy"
 PKG_PROTO_SUBDIR="$PKG_PATH/proto"
 cosmos_sdk_version=v0.45.12
 osmosis_version=v14.0.2
