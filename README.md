@@ -76,6 +76,8 @@ queries. It is associated with:
 
 ### Ex: Querying chain state
 
+**NOT IMPLEMENTED YET**
+
 ```python
 # Querying the token balances of the account
 sdk.query.get_bank_balances(sdk.address)
@@ -87,6 +89,8 @@ print(query_resp)
 ```
 
 ### Ex: Submitting transactions
+
+**NOT IMPLEMENTED YET**
 
 ```python
 from osmosispy import OpenPositionMsg
