@@ -35,7 +35,7 @@ The package is intended to be used by coders, developers, technically-skilled tr
 **NOT IMPLEMENTED YET**
 
 ```bash
-pip install osmosispy  # requires Python 3.7+
+pip install osmosispy  # requires Python 3.10+
 ```
 
 You may need to update `pip` to get this to run:
