@@ -780,6 +780,18 @@ socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
+name = "ripemd-hash"
+version = "1.0.0"
+description = "Ripemd library for Python"
+category = "main"
+optional = false
+python-versions = ">=3.5"
+files = [
+    {file = "ripemd-hash-1.0.0.tar.gz", hash = "sha256:61e0fb54c13a28cf38d75b66c71058292c955d7c96b4514c6bd5840e08a49ec7"},
+    {file = "ripemd_hash-1.0.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ec798dae399c16f9b2bbf63ce157997a1c52ab22b2b9418b275201b13554e109"},
+]
+
+[[package]]
 name = "setuptools"
 version = "67.6.0"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
@@ -852,4 +864,4 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "3.11.2"
-content-hash = "4edf7dd7c503ba588f5806272c031ab4c1d1a8a298ba0db166b03f736f13c6f5"
+content-hash = "ac28899883f57952b20940523a9273c86d0dc54463950493974a6fa3f7510130"

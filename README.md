@@ -68,7 +68,7 @@ The publish workflow looks like this:
 3. Create a tag and push it the remote origin.
 
    ```sh
-   git tag -asm "v0.0.2" v0.0.2
+   git tag -asm "v1.2.3" v1.2.3
    git push --tags
    ```
 

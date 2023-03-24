@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "osmosispy"
-version = "0.0.5"
+version = "0.0.6"
 description = "Osmosis Python SDK"
 packages = [
     { include = "osmosispy" },
@@ -25,6 +25,7 @@ ecdsa = "0.18.0"
 mnemonic = "0.20"
 importlib = "1.0.4"
 setuptools = "^67.6.0"
+ripemd-hash = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
 black = "22.6.0"

@@ -1,7 +1,7 @@
 import hashlib
 import json
 from typing import Tuple
-
+from ripemd.ripemd160 import ripemd160
 import requests
 from bech32 import bech32_decode, bech32_encode, convertbits
 from bip32 import BIP32
@@ -9,8 +9,6 @@ from ecdsa import BadSignatureError, SECP256k1, SigningKey, VerifyingKey
 from ecdsa.util import sigencode_string_canonize
 from mnemonic import Mnemonic
 from osmosis_proto.proto.cosmos.crypto.secp256k1.keys_pb2 import PubKey as PubKeyProto
-
-from osmosispy.crypto.ripemd160 import ripemd160
 
 BECH32_PUBKEY_ACC_PREFIX = "osmopub"
 BECH32_PUBKEY_VAL_PREFIX = "osmovaloperpub"
