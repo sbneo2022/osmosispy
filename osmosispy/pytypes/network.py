@@ -50,7 +50,7 @@ class Network:
         return cls(
             lcd_endpoint=f'https://lcd.osmosis.zone',
             grpc_endpoint=f'grpc.osmosis.zone:9090',
-            tendermint_rpc_endpoint=f'https://rpc.osmosis.zone:443	',
+            tendermint_rpc_endpoint=f'https://rpc.osmosis.zone:443',
             chain_id=f'osmosis-1',
             env=NetworkType.MAINNET.value,
         )
