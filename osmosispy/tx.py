@@ -130,7 +130,6 @@ class TxClient:
         fee = [
             cosmos_base_coin_pb.Coin(
                 amount=str(int(gas_price * gas_wanted)),
-                denom=self.network.fee_denom,
             )
         ]
         logging.info(

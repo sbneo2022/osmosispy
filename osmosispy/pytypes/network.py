@@ -11,48 +11,49 @@ import os
 from typing import Dict, List, Optional
 
 
+class NetworkType(enum.Enum):
+    """Enum class for the available network types. E.g. 'testnet' and 'devnet'."""
+
+    DEVNET = "devnet"
+    TESTNET = "testnet"
+    LOCALNET = "localnet"
+
+
 @dataclasses.dataclass
 class Network:
     lcd_endpoint: str
     grpc_endpoint: str
     tendermint_rpc_endpoint: str
     chain_id: str
-    websocket_endpoint: str
     env: str = "custom"
-    fee_denom: str = "uosmo"
 
     @property
     def is_insecure(self) -> bool:
         return not ("https" in self.tendermint_rpc_endpoint)
 
     @classmethod
-    def testnet(cls, chain_num: int = 4) -> "Network":
-        """
-        Testnet is a network open to invited validators. It is more stable than
-        devnet and provides a faucet to get some funds
-
-        Args:
-          chain_num (int): Testnet number
-
-        Returns:
-            Network: The updated Network object.
-        """
-        return cls(
-            lcd_endpoint=f'https://lcd.testnet-{chain_num}.osmosis.zone ',
-            grpc_endpoint=f'tcp://grpc.testnet-{chain_num}.osmosis.zone :443',
-            tendermint_rpc_endpoint=f'https://rpc.testnet-{chain_num}.osmosis.zone ',
-            websocket_endpoint=f'wss://rpc.testnet-{chain_num}.osmosis.zone /websocket',
-            chain_id=f'osmo-test-{chain_num}',
-            fee_denom='uosmo',
-            env='testnet',
-        )
-
-    @classmethod
-    def mainnet(cls) -> "Network":
+    def devnet(cls) -> "Network":
         """
         **NOT IMPLEMENTED YET**
         """
         raise NotImplementedError
+
+    @classmethod
+    def testnet(cls) -> "Network":
+        """
+        **NOT IMPLEMENTED YET**
+        """
+        raise NotImplementedError
+
+    @classmethod
+    def mainnet(cls) -> "Network":
+        return cls(
+            lcd_endpoint=f'https://lcd.osmosis.zone',
+            grpc_endpoint=f'grpc.osmosis.zone:9090',
+            tendermint_rpc_endpoint=f'https://rpc.osmosis.zone:443	',
+            chain_id=f'osmosis-1',
+            env=NetworkType.MAINNET.value,
+        )
 
     @classmethod
     def localnet(cls) -> "Network":
@@ -65,13 +66,11 @@ class Network:
             Network: The updated Network object.
         """
         return cls(
-            lcd_endpoint='http://localhost:1317',
-            grpc_endpoint='localhost:9090',
-            tendermint_rpc_endpoint='http://localhost:26657',
-            websocket_endpoint='ws://localhost:26657/websocket',
-            chain_id='osmo-local-0',
-            fee_denom='uosmo',
-            env='local',
+            lcd_endpoint=f'https://lcd.osmosis.zone',
+            grpc_endpoint=f'grpc.osmosis.zone:9090',
+            tendermint_rpc_endpoint=f'https://rpc.osmosis.zone:443	',
+            chain_id=f'osmosis-1',
+            env=NetworkType.LOCALNET.value,
         )
 
     def string(self) -> str:
@@ -83,11 +82,3 @@ class Network:
             str: The name of the current environment.
         """
         return self.env
-
-
-class NetworkType(enum.Enum):
-    """Enum class for the available network types. E.g. 'testnet' and 'devnet'."""
-
-    DEVNET = "devnet"
-    TESTNET = "testnet"
-    LOCALNET = "localnet"
