@@ -298,23 +298,3 @@ class GrpcClient:
         )
         result = self.stubTx.BroadcastTx.__call__(req)
         return result.tx_response
-
-    def get_chain_id(self) -> str:
-        """
-        Gets the chain id
-
-        Returns:
-            str: the chain id
-
-        """
-        latest_block = self.get_latest_block()
-        return latest_block.block.header.chain_id
-
-    def get_grants(self, granter: str, grantee: str, **kwargs):
-        return self.stubAuthz.Grants(
-            authz_query.QueryGrantsRequest(
-                granter=granter,
-                grantee=grantee,
-                msg_type_url=kwargs.get("msg_type_url"),
-            )
-        )
