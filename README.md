@@ -27,14 +27,10 @@ The `osmosispy` and `osmosis_proto` package allows you to interact with the Osmo
 
 ## Installation from `PyPI`
 
-<!-- TODO: register on PyPI -->
-
-**NOT IMPLEMENTED YET**
-
 ```bash
 python -m pip install --upgrade pip
 
-pip install osmosispy  # requires Python 3.10+
+pip install osmosispy  # requires Python 3.11.2+
 ```
 
 ## Usage
