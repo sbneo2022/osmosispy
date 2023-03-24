@@ -48,21 +48,10 @@ python -m pip install --upgrade pip
 
 ### Ex: Creating a wallet and SDK client
 
-**NOT IMPLEMENTED YET**
-
-```python
-from osmosispy import wallet
-
-# Save the mnemonic for later
-mnemonic, private_key = wallet.PrivateKey.generate()
-```
-
-After, creating an account, you can create an `Sdk` instance.
-
 ```python
 import osmosispy
 
-network = osmosispy.network.Network.testnet(2)
+network = osmosispy.network.Network.testnet(4)
 sdk = osmosispy.Sdk.authorize(mnemonic)
   .with_network(network)
 ```
