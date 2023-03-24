@@ -16,7 +16,7 @@ from osmosis.twap.v1beta1 import twap_record_pb2 as osmosis_dot_twap_dot_v1beta1
 from osmosis.twap.v1beta1 import genesis_pb2 as osmosis_dot_twap_dot_v1beta1_dot_genesis__pb2
 from cosmos.base.v1beta1 import coin_pb2 as cosmos_dot_base_dot_v1beta1_dot_coin__pb2
 from cosmos.base.query.v1beta1 import pagination_pb2 as cosmos_dot_base_dot_query_dot_v1beta1_dot_pagination__pb2
-from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
+from google_apis.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.protobuf import any_pb2 as google_dot_protobuf_dot_any__pb2
 from cosmos_proto import cosmos_pb2 as cosmos__proto_dot_cosmos__pb2
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2

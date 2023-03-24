@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 from gogoproto import gogo_pb2 as gogoproto_dot_gogo__pb2
 from cosmos.base.v1beta1 import coin_pb2 as cosmos_dot_base_dot_v1beta1_dot_coin__pb2
-from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
+from google_apis.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 from google.protobuf import duration_pb2 as google_dot_protobuf_dot_duration__pb2
 from osmosis.lockup import lock_pb2 as osmosis_dot_lockup_dot_lock__pb2

@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 from gogoproto import gogo_pb2 as gogoproto_dot_gogo__pb2
 from google.protobuf import any_pb2 as google_dot_protobuf_dot_any__pb2
-from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
+from google_apis.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from tendermint.p2p import types_pb2 as tendermint_dot_p2p_dot_types__pb2
 from tendermint.types import block_pb2 as tendermint_dot_types_dot_block__pb2
 from tendermint.types import types_pb2 as tendermint_dot_types_dot_types__pb2

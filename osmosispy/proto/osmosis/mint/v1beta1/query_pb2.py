@@ -12,7 +12,7 @@ _sym_db = _symbol_database.Default()
 
 
 from gogoproto import gogo_pb2 as gogoproto_dot_gogo__pb2
-from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
+from google_apis.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from osmosis.mint.v1beta1 import mint_pb2 as osmosis_dot_mint_dot_v1beta1_dot_mint__pb2
 
 

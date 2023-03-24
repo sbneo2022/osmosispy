@@ -1,0 +1,1 @@
+# osmosispy/home/denis/go/pkg/mod/github.com

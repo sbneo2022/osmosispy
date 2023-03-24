@@ -9,10 +9,6 @@ cosmos_sdk_version=v0.45.12
 osmosis_version=v14.0.2
 # ------------------------------------------------
 
-prepare() {
-  mv $PKG_PATH/__init__.py __init__.py.bak
-}
-
 # Add PKG_PATH as dir if it doesn't exist.
 clean() {
   rm -rf ./proto/
@@ -68,8 +64,6 @@ code_gen() {
       -I proto \
       -I "$cosmos_sdk_dir/third_party/proto" \
       -I "$cosmos_sdk_dir/proto" \
-      --init_python_out=$PKG_PROTO_SUBDIR \
-      --init_python_opt=imports=protobuf+grpcio+grpclib \
       --python_out=$PKG_PROTO_SUBDIR \
       --grpc_python_out=$PKG_PROTO_SUBDIR \
       --mypy_out=$PKG_PROTO_SUBDIR \
@@ -77,14 +71,17 @@ code_gen() {
       $(find "${dir}" -type f -name '*.proto')
   done
 
-  mv __init__.py.bak $PKG_PATH/__init__.py
+}
+
+fix_google_apis() {
+  mv $PKG_PROTO_SUBDIR/google $PKG_PROTO_SUBDIR/google_apis
+
+  find . -type f -name '*.py' -exec sed -i 's/from google\.api/from google_apis\.api/g' {} +
 }
 
 # ------------------------------------------------
 # __main__ : Start of script execution
 # ------------------------------------------------
-
-prepare
 
 clean
 
@@ -94,10 +91,12 @@ code_gen
 
 printf "import os\nimport sys\n\nsys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))" >$PKG_PROTO_SUBDIR/__init__.py
 
+fix_google_apis
+
 echo "Complete - generated Python types from proto"
 # cleanup
 rm go.mod go.sum
 rm -rf osmosis/ proto/
 
-# poetry run python scripts/init-py.py
-# echo "Complete - converted types directories into packages"
+poetry run python scripts/init-py.py
+echo "Complete - converted types directories into packages"
