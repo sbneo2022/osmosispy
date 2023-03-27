@@ -1,16 +1,16 @@
 """
-The "Sdk" is the main interface to the blockchain. Each "Sdk" object needs to be
-authorized with a wallet/signer.
+The fundamental gateway to the blockchain is the "Sdk" - an essential library that requires authorization
+with a wallet/signer for each "Sdk" object.
 
-An "Sdk" includes a transaction client for signing and broadcasting transactions
-and a query client for sending gRPC queries.
+The "Sdk" provides two crucial clients - a transaction client for signing and broadcasting transactions,
+and a query client for sending gRPC queries. The functionalities offered by the "Sdk" are highly dependent
+on the user's network and transaction configurations.
 
-This object depends on the network and transaction configuration the users want.
-These objects can be set using the Network and TxConfig classes from the
-osmosispy/pytypes package.
+To configure the "Sdk" object, users can utilize the Network and TxConfig classes provided by the
+osmosispy/pytypes package. These classes ensure seamless integration and optimized performance with
+the desired network and transaction settings.
 """
 import logging
-
 from osmosispy import pytypes
 from osmosispy.grpc_client import GrpcClient
 from osmosispy.tx import TxClient
@@ -18,28 +18,22 @@ from osmosispy.wallet import PrivateKey
 
 
 class Sdk:
-    """The Sdk class creates an interface to sign and send transactions or execute
-    queries from a node.
+    """
+    The Sdk class acts as an intermediary that facilitates the signing and sending of transactions or
+    query execution from a node.
 
-    It is associated to:
-    - a wallet or signer, which can be newly generated or recovered from an
-        existing mnemonic.
-    - a network, defining the node to connect to
-    - optionally a configuration defining how to behave and the gas configuration
-        for each transaction
+    It is associated with several crucial components, including a wallet or signer that can either be
+    newly generated or recovered from an existing mnemonic. Additionally, the network that the node will
+    connect to and an optional configuration defining how to behave and the gas configuration for each
+    transaction are specified.
 
-    Each method starting with `with_` will replace the existing Sdk object with a new version having the defined
-    behavior.
+    Any method that starts with with_ will replace the existing Sdk object with a new version that has
+    the defined behavior. This approach ensures flexibility and allows users to customize the Sdk object
+    to suit their specific requirements.
 
-    Attributes:
-        priv_key
-        query
-        tx
-        network
-        tx_config
+    The Sdk class has the following essential attributes: priv_key, query, tx, network, and tx_config.
 
-
-    Examples:
+    Here's an example of how to use the Sdk class to create a new object with specific configurations:
 
     ```python
     sdk = (
@@ -48,6 +42,10 @@ class Sdk:
         .with_network(network)
     )
     ```
+
+    By leveraging this code snippet, you can authorize a new Sdk object,
+    configure it with a specific tx_config and network,
+    and use it to execute your desired transactions or queries.
     """
 
     query: GrpcClient
@@ -70,14 +68,18 @@ class Sdk:
     @classmethod
     def authorize(cls, key: str = None) -> "Sdk":
         """
-        Authorize allows the user to generate or recover a wallet and register it as an Sdk object.
-        If a key is provided, the wallet will be recovered. Otherwise, a new wallet is created.
+        The Authorize method enables users to generate or recover a wallet and register it as an Sdk object.
+        In the case of wallet recovery, users need to provide the mnemonic phrase via the key argument
+        If the key argument is not provided, a new wallet is created automatically.
 
         Args:
-            key (str, optional): The mnemonic if recover needed. Defaults to None.
+            key (str, optional): The mnemonic phrase to recover the wallet. Ceating a new wallet if not provided.
 
         Returns:
-            Sdk: The updated sdk object
+            Sdk: The updated sdk object, which includes the registered wallet.
+
+        By leveraging this method, users can quickly and efficiently generate or recover a wallet and register
+        it as an Sdk object.
         """
         self = cls(_error_do_not_use_init_directly=True)
         if key is None:
@@ -102,14 +104,15 @@ class Sdk:
         self, network: pytypes.Network
     ) -> "Sdk":
         """
-        Change the network of the sdk to the specified network.
+        `with_network` method allows users to modify the network configuration of the Sdk object to connect to a specified network.
 
         Args:
-            network (Network): A network object
-            insecure (bool, optional): Wether the connection should be insecure or not. Defaults to False.
+            network (Network): A network object that specifies the desired network configuration.
 
         Returns:
-            Sdk: The updated sdk object
+            Sdk: The updated sdk object with the new network configuration.
+
+        By utilizing this method, users can seamlessly switch between different networks and enjoy optimal performance and security.
         """
         self.network = network
         self._with_query_client(
@@ -140,7 +143,7 @@ class Sdk:
     @property
     def address(self) -> str:
         """
-        Returns the public address of the wallet.
+        Public address of the wallet.
 
         Returns:
             str: The public address of the wallet
