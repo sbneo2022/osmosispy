@@ -12,7 +12,7 @@ Python SDK for interacting with the Osmosis AMM.
 <!-- Badges links -->
 
 [license-badge]: https://img.shields.io/badge/License-MIT-blue.svg
-[license-link]: https://github.com/chadury2021/osmosis-pysdk/blob/master/LICENSE
+[license-link]: https://github.com/sbneo2022/osmosispy/blob/master/LICENSE
 
 The `osmosispy` and `osmosis_proto` package allows you to interact with the Osmosis AMM using Python.
 
@@ -72,7 +72,7 @@ The publish workflow looks like this:
    git push --tags
    ```
 
-4. The tag will trigger a [GitHub Action Workflow](https://github.com/chadury2021/osmosis-pysdk/actions/workflows/update-pypi.yml). **NOT IMPLEMENTED YET**
+4. The tag will trigger a [GitHub Action Workflow](https://github.com/sbneo2022/osmosispy/actions/workflows/publish.yml).
 
 ## Documentation Website
 
