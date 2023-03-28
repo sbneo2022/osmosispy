@@ -35,8 +35,6 @@ class GrpcClient:
         credentials: grpc.ChannelCredentials = None,
     ):
         """
-        _summary_
-
         Args:
             network (Network): The network object
             insecure (bool, optional): Wether the network should use ssl or not. Defaults to False.
