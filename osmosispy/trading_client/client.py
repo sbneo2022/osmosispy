@@ -2,6 +2,7 @@ from typing import Callable, Optional
 from osmosispy.trading_client.trade_data import TradeData
 from .types import TradingFee
 from osmosispy import Coin
+import re
 
 
 class ITradingClient:
@@ -9,36 +10,53 @@ class ITradingClient:
     Interface for trading clients
     """
 
-    def get_trading_fee(self, symbol: str = "USDT") -> Optional[TradingFee]:
+    @classmethod
+    def split_symbol(cls, symbol: str) -> tuple[str, str]:
         """
-        Get the current trading fee for OSMO + `symbol` pair
+        Splits the symbol into the two assets
 
         Args:
-            symbol (str, optional): The symbol to get the trading fee for. Defaults to "USDT".
+            symbol (str): The symbol to split
+
+        Returns:
+            tuple[str, str]: The two assets
+        """
+
+        v = re.split(r"([A-Z]+)(BTC|ETH|USDT|BNB|PAX|USDC|USDS)", symbol)
+
+        return v[1], v[2]
+
+    def get_trading_fee(self, symbol: str = "OSMOUSDT") -> Optional[TradingFee]:
+        """
+        Get the current trading fee for the symbol
+
+        Args:
+            symbol (str, optional): The pair to get the trading fee for. Defaults to "OSMOUSDT".
 
         Returns:
             Optional[TradingFee]: The trading fee for the pair. None if the there is no trades or fee info for the pair.
         """
         raise NotImplementedError
 
-    def get_price(self, price_in_symbol: str = "USDT") -> Coin:
+    def get_price(self, symbol: str = "OSMOUSDT") -> Coin:
         """
-        Get the current price of OSMO in `price_in_symbol` (e.g. "OSMOUSDT" pair)
+        Get the current price in the pair
 
         Args:
-            price_in_symbol (str, optional): The symbol to get the price in. Defaults to "USDT".
+            symbol (str, optional): The pair to get the price in. Defaults to "OSMOUSDT".
 
         Returns:
-            Coin: The price of OSMO in `price_in_symbol`
+            Coin: The price of the first asset in the pair
         """
         raise NotImplementedError
 
-    def listen_trades(self, cb: Callable[[TradeData], None], symbol: str = "USDT"):
+    def listen_trades(self, cb: Callable[[TradeData], None], symbol: str = "OSMOUSDT"):
         """
-        Listen to the price of OSMO in `price_in_symbol` (e.g. "OSMOUSDT" pair)
+        Listen to trades for the pair
 
         Args:
-            price_in_symbol (str, optional): The symbol to get the price in. Defaults to "USDT".
+            cb (`TradeData`) -> None: The callback to call when a trade is made
+            symbol (str, optional): The pair to listen to. Defaults to "OSMOUSDT".
 
         Example:
         ```
@@ -46,11 +64,11 @@ class ITradingClient:
         def cb(trade_data: TradeData):
             print(trade_data)
 
-        cancel = client.start_ws(cb)
+        client.listen_trades(cb)
 
         sleep(60)
 
-        cancel()
+        client.stop_ws()
         """
         raise NotImplementedError
 

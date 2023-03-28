@@ -69,17 +69,8 @@ class BinanceClient(ITradingClient):
             api_secret=cls._get_env_api_secret(),
         )
 
-    def get_trading_fee(self, symbol: str = "USDT") -> Optional[TradingFee]:
-        """
-        Get the current trading fee for OSMO + `symbol` pair
-
-        Args:
-            symbol (str, optional): The symbol to get the trading fee for. Defaults to "USDT".
-
-        Returns:
-            Optional[TradingFee]: The trading fee for the pair. None if the there is no trades or fee info for the pair.
-        """
-        res = self.api_client.trade_fee(symbol="OSMO"+symbol)
+    def get_trading_fee(self, symbol: str = "OSMOUSDT") -> Optional[TradingFee]:
+        res = self.api_client.trade_fee(symbol=symbol)
         try:
             fees = res[0]
             return TradingFee(
@@ -89,21 +80,14 @@ class BinanceClient(ITradingClient):
         except (NameError, AttributeError, IndexError):
             return None
 
-    def get_price(self, price_in_symbol: str = "USDT") -> Coin:
-        """
-        Get the current price of OSMO in `price_in_symbol` (e.g. "OSMOUSDT" pair)
+    def get_price(self, symbol: str = "OSMOUSDT") -> Coin:
+        res = self.api_client.ticker_price(symbol=symbol)
 
-        Args:
-            price_in_symbol (str, optional): The symbol to get the price in. Defaults to "USDT".
+        print(res)
 
-        Returns:
-            Coin: The price of OSMO in `price_in_symbol`
-        """
-        res = self.api_client.ticker_price(symbol="OSMO" + price_in_symbol)
+        return Coin(denom=self.split_symbol(symbol)[1], amount=res["price"])
 
-        return Coin(denom=price_in_symbol, amount=res["price"])
-
-    def listen_trades(self, cb: Callable[[TradeData], None], symbol: str = "USDT"):
+    def listen_trades(self, cb: Callable[[TradeData], None], symbol: str = "OSMOUSDT"):
         self.ws_client.start()
 
         id = self.last_id
@@ -117,15 +101,17 @@ class BinanceClient(ITradingClient):
             except KeyError as e:
                 return
 
+            quantity_asset, price_asset = self.split_symbol(symbol)
+
             # call the actual callback
             cb(TradeData(
-                price=Coin(denom=symbol, amount=data["p"]),
-                quantity=Coin(denom="OSMO", amount=data["q"]),
+                price=Coin(denom=price_asset, amount=data["p"]),
+                quantity=Coin(denom=quantity_asset, amount=data["q"]),
             ))
 
         self.ws_client.agg_trade(
             id=id,
-            symbol="OSMO" + symbol,
+            symbol=symbol,
             callback=callback,
         )
 
