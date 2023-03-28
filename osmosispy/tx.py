@@ -26,7 +26,8 @@ from osmosispy.grpc_client import GrpcClient
 
 class TxClient:
     """
-    A client for building, simulating, and broadcasting transactions.
+    The `TxClient` ia s class provided by the SDK to allow developers to build,
+    simulate, and broadcast transactions on the blockchain.
     """
 
     def __init__(
@@ -118,15 +119,16 @@ class TxClient:
 
     def simulate(self, tx: "Transaction") -> abci_type.SimulationResponse:
         """
+        Simulate a transaction to estimate gas usage, validate the transaction parameters and determine if the transaction would be executed successfully.
+
         Args:
-            tx (Transaction): The transaction being simulated.
+            tx (Transaction): The transaction object to be simulated.
 
         Returns:
-            SimulationResponse: SimulationResponse defines the response generated
-                when a transaction is simulated successfully.
+            SimulationResponse: The simulation response, containing information about the simulated transaction.
 
         Raises:
-            SimulationError
+            SimulationError: If there was an error while simulating the transaction.
         """
         sim_tx_raw_bytes: bytes = tx.get_signed_tx_data()
 
@@ -139,6 +141,12 @@ class TxClient:
         return sim_res
 
     def get_address_info(self) -> wallet.Address:
+        """
+        Get the address information of the account associated with the private key.
+
+        Returns:
+            Address: The address information of the account associated with the private key.
+        """
         if self.address is None:
             pub_key: wallet.PublicKey = self.priv_key.to_public_key()
             self.address = pub_key.to_address()
@@ -148,7 +156,10 @@ class TxClient:
 
     def get_config(self, **kwargs) -> pt.TxConfig:
         """
-        Properties in kwargs overwrite the self.config
+        Get the transaction configuration.
+
+        Returns:
+            TxConfig: The transaction configuration.
         """
         config: pt.TxConfig = deepcopy(self.config)
         prop_names = dir(config)
@@ -164,37 +175,29 @@ class TxClient:
 
 class Transaction:
     """
-    Transactions trigger state changes based on messages ('msgs'). Each message
-    must be signed before being broadcasted to the network, included in a block,
-    validated, and approved through the consensus process.
+    The state of a system changes when a `Transaction` is executed with one or
+    more messages ('msgs'). In order for a message to be valid, it must be signed
+    by an authorized account and then broadcasted to the network. Once the message
+    is received by the network, it undergoes a validation process to ensure that
+    it is secure and complies with the consensus rules of the network. Only after
+    successful validation, it can be included in a block and added to the blockchain.
 
     Attributes:
-        account_num (int): Number of the account in state. Account numbers
-            increment every time an account is created so that each account has
-            its own number, and the highest account number is equivalent to the
-            number of accounts in the 'auth' module (but not necessarily the store).
-        msgs: A List of messages to be executed.
-        sequence (int): A per sender "nonce" that acts as a security measure to
-            prevent replay attacks on transactions. Each transaction request must
-            have a different sequence number from all previously executed
-            transactions so that no transaction can be replayed.
-        chain_id (str): The unique identifier for the blockchain that this
-            transaction targets. Inclusion of a 'chain_id' prevents potential
-            attackers from using signed transactions on other blockchains.
-        fee (List[Coin]): Coins to be paid in fees. The 'fee' helps prevents end
-            users from spamming the network. Gas cosumed during message execution
-            is typically priced from a fee equal to 'gas_consumed * gas_prices'.
-            Here, 'gas_prices' is the minimum gas price, and it's a parameter local
-            to each node.
-        gas_limit (int): Maximum gas to be allowed for the transaction. The
-            transaction execution fails if the gas limit is exceeded.
-        priv_key (wallet.PrivateKey): Primary signer for the transaction. By
-            convention, the signer from the first message is referred to as the
-            primary signer and pays the fee for the whole transaction. We refer
-            to this primary signer with 'priv_key'.
-        memo (str): Memo is a note or comment to be added to the transction.
-        timeout_height (int): Timeout height is the block height after which the
-            transaction will not be processed by the chain.
+        msgs (Tuple[Message]): The messages to be executed in the transaction.
+        account_num (int): The number of the account in the state.
+        sequence (int): Each transaction must have a unique sequence number
+            that serves as a security measure to prevent replay attacks.
+            The sequence number must be unique each time a transaction is
+            broadcasted to the network.
+        chain_id (str): The chain ID of the network.
+        fee (List[Coin]): The fee to be paid for the transaction.
+        gas_limit (int): The maximum amount of gas that can be used to execute
+            the transaction.
+        priv_key (wallet.PrivateKey): The private key of the account that will
+            sign the transaction.
+        memo (str): A note or description to be added to the transaction.
+        timeout_height (int): The block height after which the transaction will
+            be rejected.
     """
 
     def __init__(

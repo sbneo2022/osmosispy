@@ -293,15 +293,17 @@ class Address:
 
     def get_sequence(self, from_node=False, lcd_endpoint: str = None) -> int:
         """
-        Get the sequence number from the module. If from node is set to true, update our local indice with a query to
-        the node.
+        The `get_sequence` method retrieves the current sequence number associated with the registered wallet.
 
         Args:
-            from_node (bool, optional): Wether to query or not from the node. Defaults to False.
-            lcd_endpoint (str, optional): The lcd endoint, needed for when from_node is set to true. Defaults to None.
+            from_node (bool, optional): Wether to query or not from the node. Defaults to `False`.
+            lcd_endpoint (str, optional): The LCD endpoint of the node to query, required if `from_node` is set to `True`.
 
         Returns:
-            int: the current sequence number
+            int: The current sequence number associated with the registered wallet.
+
+        By utilizing this method, users can retrieve the current sequence number associated with their registered wallet.
+        If `from_node` is set to True, the method will query the node to update the local sequence index.
         """
         if from_node:
             self.init_num_seq(lcd_endpoint)
