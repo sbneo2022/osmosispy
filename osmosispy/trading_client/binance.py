@@ -9,7 +9,7 @@ from .client import ITradingClient
 from osmosispy import Coin
 
 
-class BinanceClient(ITradingClient):
+class BinanceTradingClient(ITradingClient):
     """
     Binance trading client
     """
@@ -49,7 +49,7 @@ class BinanceClient(ITradingClient):
         return res
 
     @classmethod
-    def from_env(cls) -> "BinanceClient":
+    def from_env(cls) -> "BinanceTradingClient":
         """
         Provides a convenient way to create a `TradingClient` instance without having to pass
         the api key and secret manually.
@@ -115,5 +115,5 @@ class BinanceClient(ITradingClient):
             callback=callback,
         )
 
-    def stop_ws(self) -> None:
+    def stop_listeners(self) -> None:
         self.ws_client.stop()

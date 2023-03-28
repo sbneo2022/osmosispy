@@ -1,5 +1,5 @@
 from typing import Callable, Optional
-from osmosispy.trading_client.trade_data import TradeData
+from .trade_data import TradeData
 from .types import TradingFee
 from osmosispy import Coin
 import re
@@ -72,7 +72,7 @@ class ITradingClient:
         """
         raise NotImplementedError
 
-    def stop_ws(self) -> None:
+    def stop_listeners(self) -> None:
         """
         Stops all listeners
         """
