@@ -26,6 +26,7 @@ mnemonic = "0.20"
 importlib = "1.0.4"
 setuptools = "^67.6.0"
 ripemd-hash = "^1.0.0"
+binance-connector = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 black = "22.6.0"
