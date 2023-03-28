@@ -1,3 +1,4 @@
+from osmosis_proto.proto.cosmos.base.v1beta1.coin_pb2 import Coin
 import sys
 
 try:
@@ -21,7 +22,6 @@ import osmosispy.exceptions  # noqa
 import osmosispy.pytypes  # noqa
 from osmosispy.grpc_client import GrpcClient  # noqa
 from osmosispy.pytypes import (  # noqa
-    Coin,
     Direction,
     Network,
     NetworkType,
@@ -30,7 +30,10 @@ from osmosispy.pytypes import (  # noqa
     TxConfig,
     TxType,
 )
-from osmosispy.trading_client import TradingClient  # noqa
+from osmosispy.trading_client import (
+    TradingClient,
+    TradingFee,
+)  # noqa
 from osmosispy.sdk import Sdk  # noqa
 from osmosispy.tx import Transaction  # noqa
 from osmosispy.wallet import Address, PrivateKey, PublicKey  # noqa

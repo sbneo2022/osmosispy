@@ -2,8 +2,7 @@ import abc
 import dataclasses
 from enum import Enum
 
-from osmosis_proto.proto.cosmos.base.v1beta1 import coin_pb2 as cosmos_base_coin_pb
-
+from osmosis_proto.proto.cosmos.base.v1beta1.coin_pb2 import Coin
 import osmosispy
 
 MAX_MEMO_CHARACTERS = 256
@@ -50,21 +49,6 @@ class Side(Enum):
 class Direction(Enum):
     ADD = 1
     REMOVE = 2
-
-
-@dataclasses.dataclass
-class Coin:
-    amount: float
-    denom: str
-
-    def _generate_proto_object(self):
-        """
-
-        Returns:
-            cosmos_base_coin_pb.Coin: the coin object as proto object
-
-        """
-        return cosmos_base_coin_pb.Coin(amount=str(self.amount), denom=self.denom)
 
 
 @dataclasses.dataclass

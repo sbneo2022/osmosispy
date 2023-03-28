@@ -3,7 +3,6 @@
 from osmosispy.pytypes.common import (  # noqa # TODO move constants to a constants.py file.; noqa
     GAS_PRICE,
     MAX_MEMO_CHARACTERS,
-    Coin,
     Direction,
     PoolAsset,
     PythonMsg,
