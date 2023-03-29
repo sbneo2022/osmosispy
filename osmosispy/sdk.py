@@ -11,10 +11,10 @@ osmosispy/pytypes package. These classes ensure seamless integration and optimiz
 the desired network and transaction settings.
 """
 import logging
-from osmosispy import pytypes
-from osmosispy.grpc_client import GrpcClient
-from osmosispy.tx import TxClient
-from osmosispy.wallet import PrivateKey
+from .pytypes import Network, TxConfig
+from .grpc_client import GrpcClient
+from .tx import TxClient
+from .wallet import PrivateKey
 
 
 class Sdk:
@@ -49,9 +49,9 @@ class Sdk:
     """
 
     query: GrpcClient
-    network: pytypes.Network
+    network: Network
     tx: TxClient
-    tx_config: pytypes.TxConfig
+    tx_config: TxConfig
     mnemonic: str
 
     def __init__(self, _error_do_not_use_init_directly=None) -> None:
@@ -63,7 +63,7 @@ class Sdk:
         self.query = None
         self.tx = None
         self.network = None
-        self.tx_config = pytypes.TxConfig()
+        self.tx_config = TxConfig()
 
     @classmethod
     def authorize(cls, key: str = None) -> "Sdk":
@@ -101,7 +101,7 @@ class Sdk:
         return self
 
     def with_network(
-        self, network: pytypes.Network
+        self, network: Network
     ) -> "Sdk":
         """
         `with_network` method allows users to modify the network configuration of the Sdk object to connect to a specified network.
@@ -116,11 +116,11 @@ class Sdk:
         """
         self.network = network
         self._with_query_client(
-            GrpcClient(network, network.is_insecure)
+            GrpcClient(network, True)
         )
         return self
 
-    def with_config(self, config: pytypes.TxConfig) -> "Sdk":
+    def with_config(self, config: TxConfig) -> "Sdk":
         """
         Change the configuration for trasnactions for the sdk to the specified config.
 

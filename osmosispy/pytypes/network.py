@@ -14,9 +14,10 @@ from typing import Dict, List, Optional
 class NetworkType(enum.Enum):
     """Enum class for the available network types. E.g. 'testnet' and 'devnet'."""
 
+    LOCALNET = "localnet"
     DEVNET = "devnet"
     TESTNET = "testnet"
-    LOCALNET = "localnet"
+    MAINNET = "mainnet"
 
 
 @dataclasses.dataclass
@@ -50,7 +51,7 @@ class Network:
         return cls(
             lcd_endpoint=f'https://lcd.osmosis.zone',
             grpc_endpoint=f'grpc.osmosis.zone:9090',
-            tendermint_rpc_endpoint=f'https://rpc.osmosis.zone:443',
+            tendermint_rpc_endpoint=f'https://rpc.osmosis.zone',
             chain_id=f'osmosis-1',
             env=NetworkType.MAINNET.value,
         )
@@ -68,7 +69,7 @@ class Network:
         return cls(
             lcd_endpoint=f'http://localhost:1317',
             grpc_endpoint=f'localhost:9090',
-            tendermint_rpc_endpoint=f'http://localhost:26657	',
+            tendermint_rpc_endpoint=f'http://localhost:26657',
             chain_id=f'osmosis-1',
             env=NetworkType.LOCALNET.value,
         )

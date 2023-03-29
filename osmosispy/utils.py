@@ -3,6 +3,9 @@ from typing import Dict, List, Optional, Union
 import collections
 from typing import Any,  Dict, Iterable, List, Optional, Union
 from google.protobuf.timestamp_pb2 import Timestamp
+from google.protobuf import any_pb2
+from osmosis_proto.proto.osmosis.gamm.pool_models.stableswap import stableswap_pool_pb2
+from osmosis_proto.proto.osmosis.gamm.pool_models.balancer import balancerPool_pb2
 
 # number of decimal places
 PRECISION = 18
@@ -221,8 +224,13 @@ def deserialize(pb_msg: message.Message, no_sdk_transformation: bool = False) ->
     Returns:
         dict: 'pb_msg' as a JSON-able dictionary.
     """
+
+    if isinstance(pb_msg, any_pb2.Any):
+        return pb_msg
+
     if not isinstance(pb_msg, message.Message):
         return pb_msg
+
     custom_dtypes: Dict[str, bytes] = {
         str(field[1]): field[0].GetOptions().__getstate__().get("serialized", None)
         for field in pb_msg.ListFields()
@@ -273,3 +281,20 @@ def deserialize(pb_msg: message.Message, no_sdk_transformation: bool = False) ->
                 pb_msg.__getattribute__(attr))
 
     return serialized_output
+
+
+def deserialize_pool(pool: any_pb2.Any):
+    """
+    Deserialize different pool types from Any type
+
+    TODO: make this more generic and automate the process
+    """
+    if pool.Is(stableswap_pool_pb2.Pool.DESCRIPTOR):
+        pool_obj = stableswap_pool_pb2.Pool()
+    elif pool.Is(balancerPool_pb2.Pool.DESCRIPTOR):
+        pool_obj = balancerPool_pb2.Pool()
+    else:
+        raise ValueError("Unknown pool type", pool.type_url)
+
+    pool_obj.ParseFromString(pool.value)
+    return deserialize(pool_obj)

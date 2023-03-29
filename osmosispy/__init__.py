@@ -30,7 +30,7 @@ from osmosispy.pytypes import (  # noqa
     TxConfig,
     TxType,
 )
-import osmosispy.trading_client as trading  # noqa
 from osmosispy.sdk import Sdk  # noqa
 from osmosispy.tx import Transaction  # noqa
 from osmosispy.wallet import Address, PrivateKey, PublicKey  # noqa
+import osmosispy.trading_client as trading  # noqa
