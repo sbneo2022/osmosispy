@@ -8,12 +8,15 @@ Python SDK for interacting with the Osmosis AMM.
 
 [![Project Status: WIP -- Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://img.shields.io/badge/repo%20status-WIP-yellow.svg)](https://www.repostatus.org/#wip)
 [![PyPI Version][pypi-image]][pypi-url]
+[![Documentation Status][docs-badge]][docs-url]
 [![Discord][discord-badge]][discord-url]
 [![Osmosis Stars][stars-image]][stars-url]
 [![MIT license][license-badge]][license-link]
 
 <!-- Badges links -->
 
+[docs-badge]: https://img.shields.io/badge/docs-passing-green.svg
+[docs-url]: https://docs.osmosis.zone/
 [discord-badge]: https://dcbadge.vercel.app/api/server/osmosis?style=flat
 [discord-url]: https://discord.gg/osmosis
 [stars-image]: https://img.shields.io/github/stars/osmosis-labs?style=social
@@ -104,4 +107,4 @@ The publish workflow looks like this:
 
 ## Documentation Website
 
-Documentation can be found [here](https://example.com) (**NOT IMPLEMENTED YET**)
+Documentation can be found [here](https://docs.osmosis.zone/).
