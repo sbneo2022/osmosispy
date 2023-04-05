@@ -30,7 +30,6 @@ The `osmosispy` and `osmosis_proto` package allows you to interact with the Osmo
 
 #### README Contents
 
-- [Python SDK Tutorial](#python-sdk-tutorial)
 - [Installation from `PyPI`](#installation-from-pypi)
 - [Usage](#usage)
   - [Ex: Creating a wallet and SDK client](#ex-creating-a-wallet-and-sdk-client)
@@ -51,6 +50,7 @@ pip install osmosispy  # requires Python 3.11.2+
 ### Ex: Creating a wallet and SDK client
 
 **example.py**
+
 ```python
 #!/usr/bin/env python3
 
@@ -71,7 +71,6 @@ print(trader.address)
 $ python3 example.py
 osmo1jggt8pcj2d8m9n62luytf8sdncj5uxfs3su2my
 ```
-
 
 ### More exmaples
 
