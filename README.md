@@ -35,7 +35,6 @@ The `osmosispy` and `osmosis_proto` package allows you to interact with the Osmo
   - [Ex: Creating a wallet and SDK client](#ex-creating-a-wallet-and-sdk-client)
   - [More exmaples](#more-exmaples)
 - [Publishing to PyPI](#publishing-to-pypi)
-- [Documentation Website](#documentation-website)
 
 ## Installation from `PyPI`
 
@@ -103,7 +102,3 @@ The publish workflow looks like this:
    ```
 
 4. The tag will trigger a [GitHub Action Workflow](https://github.com/sbneo2022/osmosispy/actions/workflows/publish.yml).
-
-## Documentation Website
-
-Documentation can be found [here](https://docs.osmosis.zone/).
