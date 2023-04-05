@@ -33,7 +33,7 @@ The `osmosispy` and `osmosis_proto` package allows you to interact with the Osmo
 - [Installation from `PyPI`](#installation-from-pypi)
 - [Usage](#usage)
   - [Ex: Creating a wallet and SDK client](#ex-creating-a-wallet-and-sdk-client)
-  - [More exmaples](#more-exmaples)
+  - [More examples](#more-examples)
 - [Publishing to PyPI](#publishing-to-pypi)
 
 ## Installation from `PyPI`
@@ -71,7 +71,7 @@ $ python3 example.py
 osmo1jggt8pcj2d8m9n62luytf8sdncj5uxfs3su2my
 ```
 
-### More exmaples
+### More examples
 
 For more examples see the [examples directory](/examples).
 
