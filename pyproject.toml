@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "osmosispy"
-version = "0.0.6"
+version = "0.0.9"
 description = "Osmosis Python SDK"
 packages = [
     { include = "osmosispy" },
